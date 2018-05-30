@@ -1,0 +1,93 @@
+<!--
+  Generated template for the IncidenciaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Informe de incidencia</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card text-wrap>
+
+    <ion-card-content padding>
+
+      <ion-list>
+
+        <ion-item>
+          <ion-label floating>Causa de la incidencia</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+
+
+        <ion-label>¿Quiere enviar un audio para explicar con mayor detalle la incidencia?</ion-label>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button ion-button (click)="grabar()">Si</button>
+              <button ion-button>No</button>
+              <button *ngIf="grabando" ion-button (click)="stop()">Parar</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div *ngIf="audioRetrieved">
+          <p>Este es el audio que has grabado</p>
+
+          <ion-item [ngSwitch]="playing">
+
+            <p>{{nombreArchivo}}</p>
+            <button *ngSwitchCase="false" ion-button clear (click)="playAudio()">
+              <ion-icon name="play"></ion-icon>
+            </button>
+            <button *ngSwitchCase="true" ion-button clear (click)="stopAudio()">
+              <ion-icon name="pause"></ion-icon>
+            </button>
+
+          </ion-item>
+
+          <p>¿Esta bien?</p>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <button ion-button (click)="sendAudio()">
+                  Sí
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button>
+                  No, repetir
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </div>
+
+        <ion-label>¿Quiere enviar una foto para que podamos ver la incidencia con mayor detalle?</ion-label>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              <button ion-button (click)="getImagen()">Si</button>
+              <button ion-button>No</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <img [src]="imagen" *ngIf="imagen" />
+      </ion-list>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
